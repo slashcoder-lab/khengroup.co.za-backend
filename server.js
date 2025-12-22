@@ -8,7 +8,7 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import { EventEmitter } from "events";
 
-// Increase max listeners globally
+// Increase max listeners
 EventEmitter.defaultMaxListeners = 20;
 
 // Routes
@@ -23,7 +23,7 @@ import Callback from "./models/callback.js";
 
 dotenv.config();
 
-// -------------------- INIT APP --------------------
+// -------------------- INIT --------------------
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -36,7 +36,7 @@ app.use(
   })
 );
 
-// -------------------- RATE LIMITER --------------------
+// -------------------- RATE LIMIT --------------------
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -62,7 +62,7 @@ app.use(
     origin: (origin, cb) =>
       !origin || allowedOrigins.includes(origin)
         ? cb(null, true)
-        : cb(new Error("CORS blocked: " + origin), false),
+        : cb(new Error("CORS blocked: " + origin)),
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
@@ -71,10 +71,11 @@ app.use(
 // -------------------- DATABASE --------------------
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    if (!process.env.MONGODB_URI) {
+      throw new Error("MONGODB_URI is not set");
+    }
+
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log("✅ MongoDB connected");
   } catch (err) {
     console.error("❌ MongoDB error:", err.message);
@@ -120,7 +121,6 @@ app.use("/api/callbacks", callbacksRouter);
 app.use("/members", membersRouter);
 
 // -------------------- DASHBOARD APIs --------------------
-// Members stats
 app.get("/api/members/stats", async (req, res) => {
   try {
     const count = await Member.countDocuments();
@@ -132,7 +132,10 @@ app.get("/api/members/stats", async (req, res) => {
     const monthly = await Member.aggregate([
       {
         $group: {
-          _id: { month: { $month: "$createdAt" }, year: { $year: "$createdAt" } },
+          _id: {
+            month: { $month: "$createdAt" },
+            year: { $year: "$createdAt" },
+          },
           count: { $sum: 1 },
         },
       },
@@ -155,7 +158,6 @@ app.get("/api/members/stats", async (req, res) => {
   }
 });
 
-// Traffic last 7 days
 app.get("/api/traffic/week", async (req, res) => {
   try {
     const today = new Date();
@@ -176,23 +178,18 @@ app.get("/api/traffic/week", async (req, res) => {
       map[new Date(r.date).toDateString()] = r.visits;
     });
 
-    const weekly = {
-      labels: last7Days.map((d) => d.toLocaleDateString()),
-      data: last7Days.map((d) => map[d.toDateString()] || 0),
-    };
-
     res.json({
       success: true,
-      count: weekly.data.reduce((a, b) => a + b, 0),
-      weekly,
+      weekly: {
+        labels: last7Days.map((d) => d.toLocaleDateString()),
+        data: last7Days.map((d) => map[d.toDateString()] || 0),
+      },
     });
   } catch (err) {
-    console.error("Traffic error:", err.message);
     res.status(500).json({ success: false, message: err.message });
   }
 });
 
-// Callbacks stats
 app.get("/api/callbacks/stats", async (req, res) => {
   try {
     const count = await Callback.countDocuments();
@@ -211,28 +208,24 @@ app.get("/api/callbacks/stats", async (req, res) => {
   }
 });
 
-// -------------------- STATIC FILES --------------------
-app.use(express.static(path.join(__dirname, "public"))); // images, CSS, JS
-
-// -------------------- INTRO PAGE --------------------
-app.get("/", (_, res) => {
-  res.sendFile(path.join(__dirname, "public", "intro.html"));
+// -------------------- ROOT (API ONLY) --------------------
+app.get("/", (req, res) => {
+  res.json({ success: true, message: "API is running 🚀" });
 });
 
-// -------------------- CATCH-ALL FALLBACK --------------------
-// Any other route goes to index.html (home page)
-app.use("*", (_, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+// -------------------- 404 FOR API --------------------
+app.use("/api/*", (req, res) => {
+  res.status(404).json({ success: false, message: "API route not found" });
 });
 
-// -------------------- GLOBAL ERROR HANDLER --------------------
+// -------------------- ERROR HANDLER --------------------
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err.message);
   res.status(500).json({ success: false, message: err.message });
 });
 
 // -------------------- START SERVER --------------------
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 app.listen(PORT, () =>
-  console.log(`🚀 Server running on http://localhost:${PORT}`)
+  console.log(`🚀 API running on Railway port ${PORT}`)
 );
