@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Khen Funeral Grocery Scheme — Home</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+<style>
+  .bg-navy { background-color: #0B2545; }
+  .gold { color: #D4AF37; }
+  html { scroll-behavior: smooth; }
+  .hero-bg {
+    background: linear-gradient(180deg, rgba(11,37,69,0.6), rgba(255,255,255,0.3)),
+       url('images/KHEN Poster/KHEN Final Family tree.png') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 2rem;
+  }
+  .hero-text-shadow { text-shadow: 1px 1px 6px rgba(0,0,0,0.5); }
+  .pulse-hover:hover { animation: pulse 1.2s infinite; }
+  @keyframes pulse { 0%,100% { transform: scale(1);} 50% { transform: scale(1.05);} }
+  .gallery-img { cursor: pointer; transition: transform 0.3s; }
+  .gallery-img:hover { transform: scale(1.05) rotate(1deg); }
+  @keyframes fadeDown { 0% {opacity:0; transform:translateY(-10px);} 100% {opacity:1; transform:translateY(0);} }
+  .animate-fade-down { animation: fadeDown 0.5s ease forwards; }
+  /* Rating Stars */
+  .star { transition: color 0.2s; }
+</style>
+</head>
+<body class="antialiased text-gray-800 bg-gray-50 overflow-x-hidden">
+
+<!-- Announcement -->
+<div id="announcement" class="w-full bg-navy text-white shadow-md animate-fade-down">
+  <div class="mx-auto max-w-6xl px-4 py-2 text-center text-sm md:text-base">
+    🎉 <strong>Website has been launched!</strong> — <span id="announce-detail">Become a member to claim your slot.</span>
+  </div>
+</div>
+
+<!-- Navbar -->
+<header class="shadow-sm bg-white sticky top-0 z-40 transition-all duration-500">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center gap-3" data-aos="fade-right">
+        <img src="images/KHEN LOGO's/KGS Final Funeral Grocery Scheme logo.png" alt="Khen Logo" class="h-10 w-10 rounded-md object-cover shadow">
+        <div>
+          <div class="text-lg font-semibold">Khen Funeral Grocery Scheme</div>
+          <div class="text-xs text-gray-500 gold">KGS</div>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="index.html" class="hover:text-[#D4AF37] transition">Home</a>
+        <a href="about.html" class="hover:text-[#D4AF37] transition">About</a>
+        <a href="services.html" class="hover:text-[#D4AF37] transition">Services</a>
+        <a href="#gallery" class="hover:text-[#D4AF37] transition">Gallery</a>
+        <a href="contact.html" class="hover:text-[#D4AF37] transition">Contact Us</a>
+        <a href="sign-application.html" class="hover:text-[#D4AF37] transition">Become a member</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="admin.login.html" class="hidden md:inline-block px-4 py-2 rounded-md border border-navy text-navy text-sm hover:bg-navy hover:text-white shadow-md transition-all duration-300 transform hover:scale-105">Admin Login</a>
+        <button id="mobileMenuBtn" class="md:hidden p-2 rounded-md focus:outline-none hover:bg-gray-100 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden py-2 animate-fade-down">
+      <a href="index.html" class="block px-2 py-2 hover:bg-gray-100">Home</a>
+      <a href="about.html" class="block px-2 py-2 hover:bg-gray-100">About</a>
+      <a href="services.html" class="block px-2 py-2 hover:bg-gray-100">Services</a>
+      <a href="#gallery" class="block px-2 py-2 hover:bg-gray-100">Gallery</a>
+      <a href="contact.html" class="block px-2 py-2 hover:bg-gray-100">Contact</a>
+      <a href="admin.login.html" class="block px-2 py-2 hover:bg-gray-100">Admin Login</a>
+      <a href="sign-application.html" class="block px-2 py-2 hover:bg-gray-100">Sign In</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero-bg relative overflow-hidden" id="home">
+  <div class="max-w-6xl px-4 text-center md:text-left text-white" data-aos="fade-up" data-aos-duration="1500">
+    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight hero-text-shadow">
+      Dignity in Every Moment.<br><span class="gold">Support When You Need It Most.</span>
+    </h1>
+    <p class="mt-6 text-lg max-w-xl hero-text-shadow">Khen Funeral Grocery Scheme helps you prepare for funeral and catering expenses through manageable monthly grocery payments.</p>
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+      <a href="sign-application.html" class="px-8 py-3 rounded-md bg-navy text-white font-medium shadow-lg hover:shadow-xl transform hover:scale-105 transition pulse-hover">Join Now</a>
+      <a href="about.html" class="px-8 py-3 rounded-md border border-white hover:bg-white hover:text-navy transition transform hover:scale-105">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- About & Services -->
+<section class="bg-white py-20">
+  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+    <div data-aos="fade-right">
+      <h2 class="text-3xl font-bold text-[#0B2545]">About Khen Funeral Grocery Scheme</h2>
+      <p class="mt-4 text-gray-600 leading-relaxed">
+        Founded in May 2025 by the Sithole and Zwane families, Khen Funeral Grocery Scheme brings dignity, compassion, and financial relief to South African families.
+      </p>
+      <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700">
+        <li class="hover:translate-x-2 transition">• Monthly collections</li>
+        <li class="hover:translate-x-2 transition">• Bulk purchase discounts</li>
+        <li class="hover:translate-x-2 transition">• Secure member management</li>
+        <li class="hover:translate-x-2 transition">• Community-first governance</li>
+      </ul>
+      <a href="sign-application.html" class="inline-block mt-8 px-6 py-3 rounded-md bg-navy text-white hover:bg-[#102b50] shadow-md transform hover:scale-105 transition">Become a Member</a>
+    </div>
+
+    <div id="services" class="text-center flex flex-col items-center gap-6" data-aos="fade-left">
+      <h3 class="text-2xl font-semibold mb-6 text-[#0B2545]">Our Family of Services</h3>
+      <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6">
+        <div class="tilt-card flex flex-col items-center group">
+          <img src="images/KHEN LOGO's/KGS Final Funeral Grocery Scheme logo.png" alt="Funeral Grocery" class="w-36 sm:w-40 rounded-xl shadow-lg border-4 border-[#0B2545] group-hover:border-[#D4AF37] transition" />
+          <h5 class="mt-3 font-semibold text-[#0B2545]">Funeral Grocery Scheme</h5>
+          <p class="text-gray-600 text-sm max-w-[200px] text-center">Affordable, dignified grocery support when it’s needed most.</p>
+        </div>
+        <div class="tilt-card flex flex-col items-center group">
+          <img src="images/KHEN LOGO's/KHEN KCS-  Final Catering logo.jpg" alt="Catering" class="w-36 sm:w-40 rounded-xl shadow-lg border-4 border-[#0B2545] group-hover:border-[#D4AF37] transition" />
+          <h5 class="mt-3 font-semibold text-[#0B2545]">Khen Catering Services</h5>
+          <p class="text-gray-600 text-sm max-w-[200px] text-center">Professional catering for funerals and special gatherings.</p>
+        </div>
+        <div class="tilt-card flex flex-col items-center group">
+          <img src="images/KHEN LOGO's/KHEN KCS Final Cleaning and supply logo.png" alt="Cleaning & Supply" class="w-36 sm:w-40 rounded-xl shadow-lg border-4 border-[#0B2545] group-hover:border-[#D4AF37] transition" />
+          <h5 class="mt-3 font-semibold text-[#0B2545]">Khen Cleaning & Supply</h5>
+          <p class="text-gray-600 text-sm max-w-[200px] text-center">Keeping homes & venues spotless with care & professionalism.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery" class="bg-gray-50 py-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <h3 class="text-2xl font-semibold text-[#0B2545] mb-10 text-center" data-aos="fade-up">Gallery</h3>
+    <div class="swiper mySwiper" data-aos="fade-up">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="images/Outreach and services images/When we learn to love ourselves, we unlock the power to love others. United in self-worth, we rise together..png" class="w-full h-64 object-cover rounded-lg shadow-lg gallery-img" alt="Slide 1"></div>
+        <div class="swiper-slide"><img src="images/Outreach and services images/outreach 2.jpg" class="w-full h-64 object-cover rounded-lg shadow-lg gallery-img" alt="Slide 2"></div>
+        <div class="swiper-slide"><img src="images/Outreach and services images/Removal.png" class="w-full h-80 object-cover rounded-xl shadow-2xl gallery-img" alt="Slide 3"></div>
+        <div class="swiper-slide"><img src="images/Outreach and services images/outreach 3.jpg" class="w-full h-64 object-cover rounded-lg shadow-lg gallery-img" alt="Slide 4"></div>
+        <div class="swiper-slide"><img src="images/Outreach and services images/cleaning 3.jpg" class="w-full h-64 object-cover rounded-lg shadow-lg gallery-img" alt="Slide 5"></div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Ratings & Feedback Section -->
+<section class="bg-gray-50 py-16" id="ratings">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h3 class="text-2xl font-semibold text-[#0B2545] mb-6" data-aos="fade-up">Rate Our Services</h3>
+    <p class="text-gray-600 mb-6" data-aos="fade-up" data-aos-delay="100">We value your feedback! Leave a rating, comment, and share your thoughts.</p>
+    <form class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="200">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-medium mb-2">Your Rating</label>
+        <div class="flex justify-center gap-2 text-4xl select-none">
+          <span class="star cursor-pointer text-gray-300 hover:text-yellow-400" data-value="1">★</span>
+          <span class="star cursor-pointer text-gray-300 hover:text-yellow-400" data-value="2">★</span>
+          <span class="star cursor-pointer text-gray-300 hover:text-yellow-400" data-value="3">★</span>
+          <span class="star cursor-pointer text-gray-300 hover:text-yellow-400" data-value="4">★</span>
+          <span class="star cursor-pointer text-gray-300 hover:text-yellow-400" data-value="5">★</span>
+        </div>
+        <input type="hidden" name="rating" id="rating-value">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-medium mb-2">Your Comment</label>
+        <textarea class="w-full border border-gray-300 rounded-md p-2" rows="4" placeholder="Write your feedback..."></textarea>
+      </div>
+      <div class="mb-4 grid md:grid-cols-2 gap-4">
+        <input type="text" placeholder="Your Name" class="w-full border border-gray-300 rounded-md p-2">
+        <input type="email" placeholder="Email / Contact" class="w-full border border-gray-300 rounded-md p-2">
+      </div>
+      <div class="mb-4 flex items-center gap-2">
+        <input type="checkbox" id="shareSocial" class="w-4 h-4">
+        <label for="shareSocial" class="text-gray-700 text-sm">I agree to publish my comment on social media</label>
+      </div>
+      <button type="submit" class="px-6 py-2 rounded-md bg-navy text-white font-medium hover:bg-[#102b50] transition">Submit Feedback</button>
+    </form>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="w-full bg-white py-16" id="contact">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6" data-aos="fade-up">Find Us</h2>
+    <p class="text-gray-600 mb-8" data-aos="fade-up" data-aos-delay="100"><strong>627/8 Vilakazi Street, Dhlamini, Soweto</strong></p>
+    <a href="map.html" class="inline-block bg-[#0a1931] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:bg-[#0f2a50] transition pulse-hover" data-aos="fade-up" data-aos-delay="200">📍 Get Directions</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-navy text-white mt-12 py-10" data-aos="fade-up">
+  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-6">
+    <div>
+      <div class="text-lg font-semibold">Khen Funeral Grocery Scheme</div>
+      <p class="text-sm text-gray-200 mt-2">Catering to your needs in times of sorrow and celebration.</p>
+      <p class="text-sm text-gray-300 mt-4">Khen Financial Services FSP 55295</p>
+      <p class="text-lg font-semibold gold mt-4">KGS</p>
+    </div>
+    <div>
+      <div class="font-semibold">Quick Links</div>
+      <ul class="mt-2 text-sm text-gray-200 space-y-1">
+        <li><a href="index.html" class="hover:text-[#D4AF37]">Home</a></li>
+        <li><a href="about.html" class="hover:text-[#D4AF37]">About</a></li>
+        <li><a href="#gallery" class="hover:text-[#D4AF37]">Gallery</a></li>
+        <li><a href="sign-application.html" class="hover:text-[#D4AF37]">Become a member</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-semibold">Contact</div>
+      <p class="mt-2 text-sm text-gray-200">Phone: +27 65 709 7900</p>
+            <p class="text-sm text-gray-200 mt-1">Email: info@khengroup.co.za</p>
+    </div>
+  </div>
+  <div class="text-center text-xs text-gray-300 py-4">&copy; <span id="year"></span> Khen Funeral Grocery Scheme — All rights reserved.</div>
+  <div class="text-center text-xs text-gray-400">Website created: Pixelbytes entity</div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+  AOS.init({ once: true, duration: 1000 });
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+  });
+
+  VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
+    max: 15,
+    speed: 400,
+    glare: true,
+    "max-glare": 0.3,
+  });
+
+  // Initialize Swiper
+  const swiper = new Swiper(".mySwiper", {
+    loop: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    spaceBetween: 20,
+    pagination: { el: ".swiper-pagination", clickable: true },
+    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+    breakpoints: {
+      640: { slidesPerView: 1, spaceBetween: 10 },
+      768: { slidesPerView: 2, spaceBetween: 20 },
+      1024: { slidesPerView: 3, spaceBetween: 20 },
+    },
+  });
+
+  // Star rating functionality
+  const stars = document.querySelectorAll('.star');
+  const ratingValue = document.getElementById('rating-value');
+
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      const value = star.getAttribute('data-value');
+      ratingValue.value = value;
+      stars.forEach(s => s.classList.remove('text-yellow-400'));
+      for (let i = 0; i < value; i++) {
+        stars[i].classList.add('text-yellow-400');
+      }
+    });
+    star.addEventListener('mouseover', () => {
+      const value = star.getAttribute('data-value');
+      stars.forEach(s => s.classList.remove('text-yellow-200'));
+      for (let i = 0; i < value; i++) {
+        stars[i].classList.add('text-yellow-200');
+      }
+    });
+    star.addEventListener('mouseout', () => {
+      stars.forEach(s => s.classList.remove('text-yellow-200'));
+    });
+  });
+</script>
+</body>
+</html>
+

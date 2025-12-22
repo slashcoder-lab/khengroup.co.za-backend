@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Khen Services — Funeral, Catering & Cleaning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    .bg-navy { background-color: #0B2545; }
+    .gold { color: #D4AF37; }
+    html { scroll-behavior: smooth; }
+    .hover-scale:hover { transform: scale(1.05); transition: transform 0.5s; }
+    .slider-container { overflow: hidden; position: relative; }
+    .slider { display: flex; transition: transform 0.5s ease; }
+    .slider img { min-width: 100%; max-height: 400px; object-fit: cover; border-radius: 1rem; cursor:pointer; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased overflow-x-hidden">
+
+  <!-- Navbar -->
+  <header class="shadow-sm bg-white sticky top-0 z-50 transition-all duration-500">
+    <div class="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-md bg-gradient-to-br from-[#0B2545] to-[#09213a] flex items-center justify-center text-white font-semibold shadow">K</div>
+        <div>
+          <div class="text-lg font-semibold">Khen Group Services</div>
+          <div class="text-xs text-gray-500 gold">Funeral Grocery • Catering • Cleaning & Supply</div>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="index.html" class="hover:text-[#D4AF37] transition">Home</a>
+        <a href="about.html" class="hover:text-[#D4AF37] transition">About</a>
+        <a href="services.html" class="hover:text-[#D4AF37] transition">Services</a>
+        <a href="contact.html" class="hover:text-[#D4AF37] transition">Contact</a>
+      </nav>
+      <button id="mobileMenuBtn" class="md:hidden p-2 rounded-md hover:bg-gray-100 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="hidden md:hidden flex flex-col gap-2 px-4 py-2 bg-white shadow">
+      <a href="index.html" class="py-2 hover:text-[#D4AF37]">Home</a>
+      <a href="about.html" class="py-2 hover:text-[#D4AF37]">About</a>
+      <a href="services.html" class="py-2 hover:text-[#D4AF37]">Services</a>
+      <a href="contact.html" class="py-2 hover:text-[#D4AF37]">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-navy text-white text-center py-20 px-4" data-aos="fade-up">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">Our Services</h1>
+    <p class="max-w-2xl mx-auto text-gray-300 mb-6">
+      United under Khen Financial Services (FSP 55295), our family of brands is committed to providing dignity, care, and quality service.
+    </p>
+  </section>
+
+  <!-- Funeral Packages Section -->
+  <section id="funeral" class="max-w-6xl mx-auto px-4 py-14">
+    <h2 class="text-3xl font-bold text-[#0B2545] mb-8 text-center">Funeral Grocery Scheme Packages</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- KGS1 Package -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-[1.02] transition cursor-pointer">
+        <img src="images/KHEN Poster/package1.jpg" alt="KGS1 Standard Package" class="w-full h-64 object-cover">
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-[#0B2545] mb-2">Standard Package — KGS1</h3>
+          <p class="text-gray-600 text-sm mb-3">Affordable essential grocery bundle providing core funeral support for families.</p>
+          <a href="#" class="inline-block px-4 py-2 bg-navy text-white rounded hover:opacity-90 text-sm">View Details</a>
+        </div>
+      </div>
+
+      <!-- KGS2 Package -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-[1.02] transition cursor-pointer">
+        <img src="images/KHEN Poster/Final KGS Poster.png" alt="KGS2 Premium Package" class="w-full h-64 object-cover">
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-[#0B2545] mb-2">Premium Package — KGS2</h3>
+          <p class="text-gray-600 text-sm mb-3">Comprehensive funeral grocery bundle with premium expanded support for bigger families.</p>
+          <a href="#" class="inline-block px-4 py-2 bg-navy text-white rounded hover:opacity-90 text-sm">View Details</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Service Logos Slider -->
+  <section class="py-16 max-w-6xl mx-auto px-4" data-aos="fade-up">
+    <h2 class="text-3xl font-bold text-[#0B2545] text-center mb-8">Explore Our Services</h2>
+
+    <div class="slider-container">
+      <div class="slider" id="serviceSlider">
+
+        <div class="px-2">
+          <img src="images/KHEN LOGO's/KGS Final Funeral Grocery Scheme logo.png" onclick="location.href='catalogue.html#funeral'" alt="Funeral Grocery Scheme">
+        </div>
+
+        <div class="px-2">
+          <img src="images/KHEN LOGO's/KHEN KCS-  Final Catering logo.jpg" onclick="location.href='catalogue.html#catering'" alt="Catering Services">
+        </div>
+
+        <div class="px-2">
+          <img src="images/KHEN LOGO's/KHEN KCS Final Cleaning and supply logo.png" onclick="location.href='catalogue.html#cleaning'" alt="Cleaning Services">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="flex justify-center gap-4 mt-4">
+      <button id="prevBtn" class="px-4 py-2 rounded-md bg-navy text-white hover:bg-[#112d55] transition">Prev</button>
+      <button id="nextBtn" class="px-4 py-2 rounded-md bg-gold text-navy hover:bg-[#c19e32] transition">Next</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-navy text-white mt-12">
+    <div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-6">
+      <div>
+        <div class="text-lg font-semibold">Khen Group Services</div>
+        <p class="text-sm text-gray-200 mt-2">Serving the community with dignity.</p>
+      </div>
+      <div>
+        <div class="font-semibold">Quick Links</div>
+        <ul class="mt-2 text-sm text-gray-200 space-y-1">
+          <li><a href="index.html" class="hover:text-[#D4AF37]">Home</a></li>
+          <li><a href="about.html" class="hover:text-[#D4AF37]">About</a></li>
+          <li><a href="services.html" class="hover:text-[#D4AF37]">Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-semibold">Contact</div>
+        <p class="mt-2 text-sm text-gray-200">Phone: +27 65 709 7900</p>
+        <p class="text-sm text-gray-200 mt-1">Email: info@khengroup.co.za</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Slider
+    const slider = document.getElementById('serviceSlider');
+    const slides = slider.children.length;
+    let currentIndex = 0;
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % slides;
+      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + slides) % slides;
+      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>

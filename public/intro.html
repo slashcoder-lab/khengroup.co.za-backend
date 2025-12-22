@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khen — Opening</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background-color: #0B2545;
+      overflow: hidden;
+      animation: pageFadeIn 1.2s ease forwards;
+    }
+
+    /* Fade in whole screen */
+    @keyframes pageFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Fade out whole screen */
+    @keyframes pageFadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    /* Logo pulse + rotate */
+    .logo-animate {
+      animation: spinPulse 3.8s ease-in-out infinite;
+    }
+
+    @keyframes spinPulse {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.12); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    /* Gold shimmer text */
+    .gold-text {
+      background: linear-gradient(90deg, #D4AF37, #f7d78b, #D4AF37);
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+
+    @keyframes shimmer {
+      from { background-position: 0% 50%; }
+      to { background-position: 200% 50%; }
+    }
+  </style>
+</head>
+
+<body class="flex items-center justify-center h-screen">
+
+  <div id="intro" class="flex flex-col items-center justify-center text-center opacity-100 transition-opacity duration-1000">
+
+    <!-- LOGO -->
+    <img 
+      src="images/KHEN LOGO's/KHEN Final main logo.png" 
+      class="w-44 md:w-60 rounded-full shadow-xl border-4 border-[#D4AF37] logo-animate"
+      alt="Khen Logo"
+    />
+
+    <!-- TITLE -->
+    <h1 class="mt-6 text-3xl md:text-5xl font-bold tracking-wide gold-text">
+      Khen Financial Services
+    </h1>
+
+    <p class="text-gray-300 mt-2 text-sm md:text-base italic">
+      If they can’t, then who Khen.
+    </p>
+
+  </div>
+
+  <script>
+  const INTRO_KEY = "khen_intro_seen";
+
+  // If intro already seen → go straight to home
+  if (localStorage.getItem(INTRO_KEY)) {
+    window.location.replace("index.html");
+  }
+
+  // Mark as seen
+  localStorage.setItem(INTRO_KEY, "true");
+
+  // Fade-out then redirect
+  setTimeout(() => {
+    document.body.style.animation = "pageFadeOut 1.5s ease forwards";
+
+    setTimeout(() => {
+      window.location.replace("index.html");
+    }, 1500);
+
+  }, 4000);
+</script>
+>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!-- admin-login.html -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Admin Login — Khen Funeral Grocery Scheme</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<style>
+  body {
+    background: linear-gradient(135deg, #0B2545, #112d55);
+  }
+  .login-card {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .login-card input:focus {
+    border-color: #D4AF37;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  }
+  .pulse-btn:hover {
+    animation: pulse 1s infinite;
+  }
+  @keyframes pulse { 0%,100% { transform: scale(1);} 50% { transform: scale(1.05);} }
+</style>
+</head>
+<body class="flex items-center justify-center h-screen p-4 overflow-hidden">
+
+<div class="login-card p-10 rounded-3xl shadow-2xl w-full max-w-md text-white" data-aos="fade-up" data-aos-duration="1200">
+  <h2 class="text-3xl font-bold text-center mb-6 tracking-wide">Admin Login</h2>
+  <p class="text-center text-gray-300 mb-8">Enter your credentials to access the admin dashboard.</p>
+  <form id="adminLoginForm" class="space-y-6">
+    <label class="block">
+      <span class="text-gray-200 font-medium">Email</span>
+      <input type="email" id="email" class="mt-1 w-full p-3 rounded-xl bg-gray-800 bg-opacity-50 border border-gray-600 text-white placeholder-gray-400 focus:ring focus:ring-gold focus:border-gold" placeholder="Enter email" required />
+    </label>
+    <label class="block">
+      <span class="text-gray-200 font-medium">Password</span>
+      <input type="password" id="password" class="mt-1 w-full p-3 rounded-xl bg-gray-800 bg-opacity-50 border border-gray-600 text-white placeholder-gray-400 focus:ring focus:ring-gold focus:border-gold" placeholder="Enter password" required />
+    </label>
+    <button type="submit" class="w-full bg-gold text-navy font-semibold py-3 rounded-xl hover:bg-yellow-400 transition pulse-btn">Login</button>
+  </form>
+  <p id="errorMsg" class="text-red-400 text-sm mt-4 text-center hidden">Invalid email or password.</p>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ once: true, duration: 1200 });
+
+  document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    const validEmail = "info@khengroup.co.za";
+    const validPassword = "2Rhinos6Zebras!";
+
+    if(email === validEmail && password === validPassword) {
+      window.location.href = "adminDashboard.html"; // Correct link to dashboard
+    } else {
+      const error = document.getElementById('errorMsg');
+      error.classList.remove('hidden');
+      setTimeout(() => { error.classList.add('hidden'); }, 4000);
+    }
+  });
+</script>
+</body>
+</html>

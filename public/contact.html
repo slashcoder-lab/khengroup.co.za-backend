@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — KHEN Services</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    .brand-green { background-color: #006A4E; }
+    .brand-blue { background-color: #003566; }
+    .brand-gold { background-color: #FAD02C; }
+</style>
+</head>
+<body class="bg-gray-100">
+
+<!-- HEADER -->
+<header class="brand-blue text-white py-6 shadow-lg">
+    <div class="max-w-6xl mx-auto flex justify-between items-center px-6">
+        <h1 class="text-3xl font-extrabold tracking-wide">Contact Us</h1>
+        <a href="index.html" class="px-4 py-2 bg-white text-[#003566] rounded-lg shadow hover:bg-gray-200 transition">
+            Home
+        </a>
+    </div>
+</header>
+
+<!-- MAIN -->
+<main class="max-w-6xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-2 gap-12">
+
+    <!-- CONTACT INFO -->
+    <div>
+        <h2 class="text-3xl font-bold text-[#003566] mb-4">Get In Touch</h2>
+        <p class="text-gray-700 leading-relaxed mb-8">
+            Whether you are applying for a service, requesting a quote, or need general assistance,
+            our KHEN team is here to support you with professionalism and care.
+        </p>
+
+        <div class="space-y-6">
+            <div class="flex items-start gap-4">
+                <div class="bg-[#003566] text-white p-3 rounded-lg shadow">📍</div>
+                <p class="text-gray-700">627/8 Vilakazi Street, Dlamini, Soweto, South Africa</p>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <div class="bg-[#006A4E] text-white p-3 rounded-lg shadow">📞</div>
+                <p class="text-gray-700">065 709 7900<br>079 883 6255</p>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <div class="bg-[#FAD02C] text-black p-3 rounded-lg shadow">✉️</div>
+                <p class="text-gray-700">thokozani.sithole@khengroup.co.za<br>info@khengroup.co.za</p>
+            </div>
+        </div>
+
+        <!-- GOOGLE MAP -->
+        <div class="mt-10 rounded-xl overflow-hidden shadow-lg">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.2310972783947!2d27.872182415260238!3d-26.260113583109718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950c8756c12345%3A0xabcdefabcdef1234!2s627%2F8%20Vilakazi%20St%2C%20Dlamini%2C%20Soweto%2C%20South%20Africa!5e0!3m2!1sen!2sza!4v1700000000002!5m2!1sen!2sza"
+                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- CONTACT FORM -->
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+        <h2 class="text-2xl font-bold text-[#006A4E] mb-6">Send Us a Message</h2>
+
+        <form id="contactForm" class="space-y-6">
+            <div>
+                <label class="block text-gray-700 font-medium">Full Name</label>
+                <input name="name" type="text" required
+                       class="w-full mt-1 p-3 border rounded-lg focus:ring-2 focus:ring-[#006A4E] outline-none">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium">Email Address</label>
+                <input name="email" type="email" required
+                       class="w-full mt-1 p-3 border rounded-lg focus:ring-2 focus:ring-[#003566] outline-none">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium">Phone Number</label>
+                <input name="phone" type="text"
+                       class="w-full mt-1 p-3 border rounded-lg focus:ring-2 focus:ring-[#FAD02C] outline-none">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium">Your Message</label>
+                <textarea name="message" rows="5" required
+                          class="w-full mt-1 p-3 border rounded-lg focus:ring-2 focus:ring-[#006A4E] outline-none"></textarea>
+            </div>
+
+            <button type="submit"
+                    class="w-full py-3 bg-[#006A4E] text-white font-semibold rounded-lg shadow hover:bg-green-800 transition">
+                Send via WhatsApp
+            </button>
+
+            <p id="formStatus" class="mt-4 text-center hidden"></p>
+        </form>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="text-center py-6 text-gray-600 mt-10">
+    © 2025 KHEN Services — All Rights Reserved
+</footer>
+
+<!-- WHATSAPP FLOAT BUTTON -->
+<a href="https://wa.me/27657097900" target="_blank"
+   class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition flex items-center justify-center"
+   style="width:60px;height:60px;font-size:28px;">
+    💬
+</a>
+
+<script>
+  const contactForm = document.getElementById("contactForm");
+  const formStatus = document.getElementById("formStatus");
+
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = Object.fromEntries(new FormData(contactForm).entries());
+
+    // Redirect to WhatsApp with prefilled message
+    const whatsappNumber = "27657097900";
+    const text = `Hello KHEN, my name is ${formData.name}. Email: ${formData.email}, Phone: ${formData.phone}, Message: ${formData.message}`;
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+
+    formStatus.textContent = "✅ Redirecting to WhatsApp...";
+    formStatus.className = "mt-4 text-center text-green-600";
+    formStatus.classList.remove("hidden");
+
+    window.open(whatsappURL, "_blank");
+    contactForm.reset();
+  });
+</script>
+
+</body>
+</html>

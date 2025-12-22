@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning Services — KHEN Services</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <style>
+        .brand-blue { background-color: #003566; }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- HEADER -->
+    <header class="brand-blue text-white py-8 text-center shadow-lg">
+        <h1 class="text-3xl font-bold">KHEN Cleaning & Supply Services</h1>
+    </header>
+
+    <main class="max-w-5xl mx-auto py-12 px-6">
+
+<!-- GALLERY SECTION (FIXED: NO CROPPING) -->
+<section id="gallery" class="py-10">
+    <h3 class="text-3xl font-bold text-center text-[#003566] mb-6">
+        Cleaning Gallery
+    </h3>
+
+    <div class="swiper mySwiper w-full rounded-xl shadow-xl bg-white p-4">
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide flex justify-center">
+                <img src="images/KHEN Poster/Cleaning & Supply.png"
+                     class="max-h-96 w-auto object-contain rounded-xl" alt="Slide 1">
+            </div>
+
+            <div class="swiper-slide flex justify-center">
+                <img src="images/Outreach and services images/cleaning 1.jpg"
+                     class="max-h-96 w-auto object-contain rounded-xl" alt="Slide 2">
+            </div>
+
+            <div class="swiper-slide flex justify-center">
+                <img src="images/Outreach and services images/cleaning 2.jpg"
+                     class="max-h-96 w-auto object-contain bg-gray-50 rounded-xl" alt="Slide 3">
+            </div>
+
+            <div class="swiper-slide flex justify-center">
+                <img src="images/Outreach and services images/cleaning 3.jpg"
+                     class="max-h-96 w-auto object-contain rounded-xl" alt="Slide 4">
+            </div>
+            </div>
+
+        </div>
+
+        <!-- ARROWS -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+        <!-- ABOUT SECTION -->
+        <h2 class="text-3xl font-bold text-[#003566] mt-16 mb-4">
+            About Our Cleaning Services
+        </h2>
+
+        <p class="text-gray-700 leading-relaxed text-lg">
+            KHEN provides affordable and reliable cleaning services for homes, businesses, and events.
+            Our team uses safe cleaning products and modern techniques to ensure high-quality results.
+        </p>
+
+        <!-- SERVICES OFFERED -->
+        <h3 class="text-2xl font-semibold mt-10 mb-4 text-[#003566]">
+            Services We Offer
+        </h3>
+
+        <ul class="list-disc ml-6 space-y-2 text-gray-700 text-lg">
+            <li>Residential cleaning</li>
+            <li>Office and commercial cleaning</li>
+            <li>Event preparation & cleanup</li>
+            <li>Deep cleaning and sanitation</li>
+            <li>Cleaning supplies and consumables packages at the price of R140 for 4 products</li>
+        </ul>
+
+        <!-- BUTTONS -->
+        <div class="mt-12 flex flex-col md:flex-row gap-4">
+
+            <a href="contact.html"
+               class="px-6 py-3 flex-1 bg-[#003566] text-white text-center text-lg rounded-lg shadow hover:bg-blue-900 transition">
+                Contact Us
+            </a>
+
+            <a href="services.html"
+               class="px-6 py-3 flex-1 bg-gray-200 text-gray-900 text-center text-lg rounded-lg shadow hover:bg-gray-300 transition">
+                Back to Services
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Swiper Init Script -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+          spaceBetween: 30,
+          centeredSlides: true,
+          autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+        });
+    </script>
+
+</body>
+</html>

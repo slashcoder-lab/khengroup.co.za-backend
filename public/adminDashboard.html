@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Admin Dashboard — KGS</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<style>
+  body { background: #f3f4f6; }
+  .card { transition: transform 0.3s, box-shadow 0.3s; }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+  .logout-btn { background: #D4AF37; color: #0B2545; }
+  .logout-btn:hover { background: #bfa238; }
+  .upload-btn { background: #0B2545; color: white; }
+  .upload-btn:hover { background: #112d55; }
+  .bg-navy { background-color: #0B2545; }
+  .text-navy { color: #0B2545; }
+  .bg-gold { background-color: #D4AF37; }
+  .text-gold { color: #D4AF37; }
+</style>
+</head>
+<body class="min-h-screen font-sans">
+
+<header class="bg-navy text-white flex justify-between items-center p-4 shadow-md">
+  <h1 class="text-2xl font-bold">KGS Admin Dashboard</h1>
+  <div class="flex gap-3">
+    <button onclick="exportPDF()" class="px-4 py-2 rounded-lg font-semibold bg-gold hover:bg-yellow-400 transition">Export PDF</button>
+    <button onclick="logout()" class="logout-btn px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition">Logout</button>
+  </div>
+</header>
+
+<main class="p-6 max-w-7xl mx-auto space-y-10">
+
+  <!-- Stats Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded-2xl shadow card" data-aos="fade-up">
+      <h3 class="text-gray-600">Total Members</h3>
+      <p id="totalMembers" class="text-4xl font-bold mt-2">0</p>
+    </div>
+    <div class="bg-white p-6 rounded-2xl shadow card" data-aos="fade-up" data-aos-delay="100">
+      <h3 class="text-gray-600">Website Traffic</h3>
+      <p id="totalTraffic" class="text-4xl font-bold mt-2">0</p>
+    </div>
+    <div class="bg-white p-6 rounded-2xl shadow card" data-aos="fade-up" data-aos-delay="200">
+      <h3 class="text-gray-600">Callback Requests</h3>
+      <p id="totalCallbacks" class="text-4xl font-bold mt-2">0</p>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded-2xl shadow card" data-aos="fade-up">
+      <h2 class="text-xl md:text-2xl font-semibold mb-4 text-navy">Website Visitors</h2>
+      <div class="w-full h-64 md:h-80">
+        <canvas id="trafficChart"></canvas>
+      </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow card" data-aos="fade-up">
+      <h2 class="text-xl md:text-2xl font-semibold mb-4 text-navy">New Members</h2>
+      <div class="w-full h-64 md:h-80">
+        <canvas id="membersChart"></canvas>
+      </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow card" data-aos="fade-up">
+      <h2 class="text-xl md:text-2xl font-semibold mb-4 text-navy">Callback Requests</h2>
+      <div class="w-full h-64 md:h-80">
+        <canvas id="callbackChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Callback Requests & New Members Lists -->
+  <section class="grid md:grid-cols-2 gap-6">
+    <div class="bg-white p-6 rounded-2xl shadow card" data-aos="fade-right">
+      <h2 class="text-2xl font-semibold mb-4">User Callback Requests</h2>
+      <ul id="callbackList" class="space-y-3">
+        <li class="border-b pb-2">Loading...</li>
+      </ul>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow card" data-aos="fade-left">
+      <h2 class="text-2xl font-semibold mb-4">New Members</h2>
+      <ul id="membersList" class="space-y-3">
+        <li class="border-b pb-2">Loading...</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- File Uploads -->
+  <section data-aos="fade-up">
+    <h2 class="text-2xl font-semibold mb-4">Uploads</h2>
+    <div class="bg-white p-6 rounded-2xl shadow card flex justify-start">
+      <button class="upload-btn px-6 py-3 rounded-lg hover:shadow-lg transition">Upload File to OneDrive</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ once: true, duration: 1000 });
+
+  // Logout
+  function logout() { window.location.href = "index.html"; }
+
+  // Fetch data dynamically
+  async function fetchDashboard() {
+    try {
+      // Fetch stats
+      const [membersRes, trafficRes, callbacksRes] = await Promise.all([
+        fetch('/members/count'),
+        fetch('/api/traffic/week'),
+        fetch('/api/callbacks/count')
+      ]);
+
+      const membersData = await membersRes.json();
+      const trafficData = await trafficRes.json();
+      const callbacksData = await callbacksRes.json();
+
+      document.getElementById('totalMembers').textContent = membersData.count || 0;
+      document.getElementById('totalTraffic').textContent = trafficData.count || 0;
+      document.getElementById('totalCallbacks').textContent = callbacksData.count || 0;
+
+      // Populate lists
+      populateList('callbackList', callbacksData.latest);
+      populateList('membersList', membersData.latest);
+
+      // Populate charts
+      updateCharts(membersData.monthly, trafficData.weekly, callbacksData.statuses);
+
+    } catch(err) {
+      console.error('Error fetching dashboard data:', err);
+    }
+  }
+
+  function populateList(elementId, items) {
+    const container = document.getElementById(elementId);
+    container.innerHTML = '';
+    if (!items || items.length === 0) {
+      container.innerHTML = '<li class="border-b pb-2">No data available</li>';
+      return;
+    }
+    items.forEach(item => {
+      const li = document.createElement('li');
+      li.className = 'border-b pb-2';
+      li.textContent = item;
+      container.appendChild(li);
+    });
+  }
+
+  function updateCharts(membersMonthly, trafficWeekly, callbacksStatuses) {
+    new Chart(document.getElementById('trafficChart').getContext('2d'), {
+      type: 'line',
+      data: { labels: trafficWeekly.labels, datasets: [{ label: 'Visitors', data: trafficWeekly.data, borderColor: '#D4AF37', backgroundColor: 'rgba(212,175,55,0.2)', fill: true, tension: 0.3 }] },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    new Chart(document.getElementById('membersChart').getContext('2d'), {
+      type: 'bar',
+      data: { labels: membersMonthly.labels, datasets: [{ label: 'New Members', data: membersMonthly.data, backgroundColor: '#0B2545' }] },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    new Chart(document.getElementById('callbackChart').getContext('2d'), {
+      type: 'pie',
+      data: { labels: callbacksStatuses.labels, datasets: [{ data: callbacksStatuses.data, backgroundColor: ['#D4AF37','#0B2545','#112d55'] }] },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+  }
+
+  // Export PDF
+  async function exportPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p','pt','a4');
+    const container = document.querySelector('main');
+    await html2canvas(container, { scale: 2 }).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdfWidth = doc.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      doc.save('KGS-Admin-Report.pdf');
+    });
+  }
+
+  // Initialize dashboard
+  fetchDashboard();
+</script>
+</body>
+</html>

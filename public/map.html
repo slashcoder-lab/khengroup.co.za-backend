@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF‑8">
+<meta name="viewport" content="width=device‑width, initial‑scale=1.0">
+<title>Khen Funeral Grocery Scheme — Map</title>
+
+<!-- TailwindCSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+  html, body { height:100%; margin:0; }
+  #map { height:85vh; width:100%; }
+  .leaflet-popup-content a { color:#1d4ed8; text-decoration:underline; }
+  .bouncing-marker {
+    animation: bounce 1s infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+</style>
+</head>
+<body class="bg-gray-50 flex flex-col">
+
+<header class="bg-navy text-white p-4 text-center font-semibold text-lg">
+  Khen Funeral Grocery Scheme — Location
+</header>
+
+<div id="map"></div>
+
+<div class="text-center py-6">
+  <a href="index.html"
+     class="inline-block bg-[#0a1931] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:bg-[#0f2a50] transition">
+     ⬅️ Back to Home
+  </a>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  // Coordinates for 627/8 Vilakazi Street, Dlamini, Soweto
+  const coords = [-26.2601, 27.8722];
+
+  const map = L.map('map', {
+    center: coords,
+    zoom: 19,
+    zoomControl: true,
+    scrollWheelZoom: true
+  });
+
+  const street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  const satellite = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+    maxZoom:20,
+    subdomains:['mt0','mt1','mt2','mt3']
+  });
+
+  L.control.layers({
+    "Street": street,
+    "Satellite": satellite
+  }).addTo(map);
+
+  L.control.scale().addTo(map);
+
+  const markerIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+    iconSize: [40,50],
+    iconAnchor: [20,50],
+    popupAnchor: [0,-45]
+  });
+
+  const marker = L.marker(coords, { icon: markerIcon, riseOnHover:true }).addTo(map);
+  marker._icon.classList.add('bouncing-marker');
+
+  marker.bindPopup(
+    "<b>Khen Funeral Grocery Scheme</b><br>" +
+    "627/8 Vilakazi Street, Dlamini, Soweto<br><br>" +
+    "<a href='https://www.google.com/maps/search/?api=1&query=-26.2601,27.8722' target='_blank'>Open in Google Maps</a>"
+  ).openPopup();
+
+  marker.on('click', () => {
+    window.open('https://www.google.com/maps/search/?api=1&query=-26.2601,27.8722', '_blank');
+  });
+</script>
+
+</body>
+</html>
