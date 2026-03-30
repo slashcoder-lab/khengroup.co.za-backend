@@ -206,24 +206,29 @@
 
       const formData = new FormData(this);
 
-      try {
-        const response = await fetch ('https://api.khengroup.co.za/members', {
-          method: 'POST',
-          body: formData
-        });
+     const formData = new FormData(this);
 
-        const data = await response.json();
+try {
+  const response = await fetch('https://api.khengroup.co.za/members', {
+    method: 'POST',
+    body: formData
+  });
 
-        if (data.ok) {
-          alert('Application submitted successfully!');
-          this.reset();
-        } else {
-          alert('Error: ' + (data.message || 'Unknown error'));
-        }
+  const text = await response.text();
+  console.log("SERVER RESPONSE:", text);
 
-      } catch (err) {
-        alert('Network error: ' + err.message);
-      }
+  const data = JSON.parse(text);
+
+  if (data.ok || data.success) {
+    alert('Application submitted successfully!');
+    this.reset();
+  } else {
+    alert('Error: ' + (data.message || 'Unknown error'));
+  }
+
+} catch (err) {
+  alert('Network error: ' + err.message);
+}
 
       btn.disabled = false;
       btn.textContent = 'Submit Application';
